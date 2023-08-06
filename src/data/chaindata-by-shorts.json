@@ -1,0 +1,23 @@
+{
+  "bsc": {
+    "name": "Binance",
+    "currency": "BNB",
+    "decimals": 18,
+    "explorer": "https://bscscan.com",
+    "id": "56"
+  },
+  "matic": {
+    "name": "Polygon/Matic",
+    "currency": "MATIC",
+    "decimals": 18,
+    "explorer": "https://www.polygonscan.com/",
+    "id": "137"
+  },
+  "eth": {
+    "name": "Ethereum",
+    "currency": "ETH",
+    "decimals": 18,
+    "explorer": "https://www.etherscan.io/",
+    "id": "1"
+  }
+}

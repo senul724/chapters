@@ -1,0 +1,123 @@
+{
+  "1": [
+    {
+      "name": "usdc",
+      "address": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+      "realaddress":true,
+      "checked":false,
+      "ticker":"USDC",
+      "decimals":18
+    },
+    {
+      "name": "usdt",
+      "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "ticker":"USDT",
+      "realaddress":true,
+      "checked":true,
+      "decimals":18,
+      "review":"fee = (_value.mul(basisPointsRate)).div(10000). A fee is calculated according to the given formulae"
+    },
+    {
+      "name": "busd",
+      "address": "0x4Fabb145d64652a948d72533023f6E7A623C7C53",
+      "ticker":"BUSD",
+      "realaddress":true,
+      "checked":true,
+      "decimals":18,
+      "review": "no fees, uses a proxy(high gas)"
+    },
+    {
+      "name": "shiba inu(SHIB)",
+      "address": "0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE",
+      "ticker":"SHIB",
+      "realaddress":true,
+      "checked":true,
+      "decimals":18,
+      "review": "no fee on transfer"
+    }
+  ],
+  
+  "56": [
+    {
+      "name": "usdc",
+      "address": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+      "ticker":"USDC",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "busd",
+      "address": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+      "ticker":"BUSD",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "doge coin",
+      "address": "0xbA2aE424d960c26247Dd6c32edC70B295c744C43",
+      "ticker":"DOGE",
+      "realaddress":true,
+      "decimals":18
+    },
+    {
+      "name": "shiba inu(SHIB)",
+      "address": "0x2859e4544C4bB03966803b044A93563Bd2D0DD4D",
+      "ticker":"SHIB",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "ripple(XRP)",
+      "address": "0x1d2f0da169ceb9fc7b3144628db156f3f6c60dbe",
+      "ticker":"XRP",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "cardano(ADA)",
+      "address": "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
+      "ticker":"ADA",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "litecoin",
+      "address": "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
+      "ticker":"LTC",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    }
+  ],
+  "137": [
+    {
+      "name": "usdc",
+      "address": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174",
+      "ticker":"USDC",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "usdt",
+      "address": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f",
+      "ticker":"USDT",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    },
+    {
+      "name": "chainlink(LINK)",
+      "address": "0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39",
+      "ticker":"LINK",
+      "realaddress":true,
+      "checked":false,
+      "decimals":18
+    }
+  ]
+}
