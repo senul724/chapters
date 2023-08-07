@@ -12,18 +12,22 @@ datasource db {
 }
 
 model User {
-  address     String    @id
-  signature   String
-  user_name   String?
-  collections Chapter[]
+  address   String    @id
+  signature String
+  user_name String?
+  chapters  Chapter[]
 }
 
 model Chapter {
-  id            String @id @default(uuid())
-  comesFrom     String
+  id            Int       @id @default(autoincrement())
+  level         Int
   content       String
-  author        User   @relation(fields: [authorAddress], references: [address])
+  author        User      @relation(fields: [authorAddress], references: [address])
   authorAddress String
+  rootId        Int?
+  root          Chapter?  @relation("BranchRoot", fields: [rootId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  branches      Chapter[] @relation("BranchRoot")
 
   @@index([authorAddress])
+  @@index([rootId])
 }
