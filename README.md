@@ -1,3 +1,3 @@
-# NFT Shoutout
+# Chapters
 
-App to broadcast message to your community
+Write your own story
