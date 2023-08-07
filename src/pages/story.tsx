@@ -16,6 +16,10 @@ export default function Home() {
     console.log(data);
   }, [data, chapterId]);
 
+  const getContent = (id: number) => {
+    return data?.contentList?.find((el) => el.id === id)?.content ?? "...";
+  };
+
   return (
     <>
       <Head>
@@ -25,7 +29,7 @@ export default function Home() {
       </Head>
       <main className="flex flex-col justify-center items-center min-h-screen bg-black">
         <div className="container flex flex-col gap-12 justify-center items-center py-16 px-4">
-          {data?.payload
+          {data?.payload && data.contentList
             ? (
               <>
                 {composing
@@ -34,7 +38,7 @@ export default function Home() {
                       level={data.payload.level + 1}
                       rootId={chapterId}
                       closeAction={() => setComposing(false)}
-                      prevContent={data.payload.content}
+                      prevContent={getContent(chapterId)}
                       refetch={async () => {
                         await refetch();
                       }}
@@ -44,7 +48,7 @@ export default function Home() {
                     <>
                       <div className="flex gap-4 tracking-tight border-2 py-10 w-2/3 border-[#ffc400] rounded-xl ">
                         <p className="w-full text-center drop-shadow-xl text-6xl font-semibold text-[#ffc400] ">
-                          {data.payload.content}
+                          {getContent(chapterId)}
                         </p>
                       </div>
                       <div className="-mt-5 w-1/5 bg-white h-[2px]" />
@@ -56,7 +60,7 @@ export default function Home() {
                             onClick={() => setChapterId(el.id)}
                           >
                             <p className="w-full text-center drop-shadow-xl text-2xl font-semibold text-[#ffc400] ">
-                              {el.content}
+                              {getContent(el.id)}
                             </p>
                           </div>
                         ))}

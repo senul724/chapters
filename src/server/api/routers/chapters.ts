@@ -5,6 +5,7 @@ import { z } from "zod";
 import { getErrorMsg } from "~/data/error-list";
 import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 import { prisma } from "~/server/db";
+import { mongoDB, mongoDBCount } from "~/server/mongo";
 import { ZodAvailableNetworks } from "~/types/web3";
 import { getNetworkArray } from "~/utils/type_helper";
 import * as pvtRPCs from "~/web3/rpcs/private-rpcs.json";
@@ -22,19 +23,25 @@ export const chaptersRouter = createTRPCRouter({
             rootId: input.chapterId !== 1,
             level: true,
             authorAddress: true,
-            content: true,
             branches: {
               select: {
                 id: true,
                 rootId: true,
-                content: true,
               },
             },
           },
         });
-        return { payload };
+        let contentList: { content: string; id: number }[] | null = null;
+        if (payload) {
+          const chapterIds = payload.branches.map((el) => el.id);
+          const content = await mongoDB.find({ chapterId: { $in: [...chapterIds, input.chapterId] } }).toArray();
+          contentList = content.map((el) => {
+            return { content: el.content, id: el.chapterId };
+          });
+        }
+        return { payload, contentList };
       } catch {
-        return { payload: null };
+        return { payload: null, contentList: null };
       }
     }),
   publishChapter: privateProcedure
@@ -42,12 +49,22 @@ export const chaptersRouter = createTRPCRouter({
     .mutation(async ({ input, ctx }) => {
       const { rootId, level, content } = input;
       try {
+        const payload = await mongoDBCount.findOne();
+        if (!payload?.nextId) {
+          return { success: false };
+        }
+        const nextId = Number(payload.nextId);
+        if (!nextId) {
+          return { success: false };
+        }
+        await mongoDB.insertOne({ chapterId: nextId, content });
+        await mongoDBCount.updateOne({ name: "count" }, { $set: { "nextId": nextId + 1 } });
         await prisma.chapter.create({
           data: {
+            id: nextId,
             authorAddress: ctx.session.address,
             rootId,
             level,
-            content,
           },
         });
         return { success: true };

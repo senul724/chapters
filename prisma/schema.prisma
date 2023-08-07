@@ -21,7 +21,6 @@ model User {
 model Chapter {
   id            Int       @id @default(autoincrement())
   level         Int
-  content       String
   author        User      @relation(fields: [authorAddress], references: [address])
   authorAddress String
   rootId        Int?

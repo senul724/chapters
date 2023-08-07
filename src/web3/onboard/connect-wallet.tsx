@@ -84,7 +84,7 @@ export const ConnectWallet = (props: {
     const state = await loginIn({ address: account, signature: token });
     if (state) {
       toast.success("successfully logged in!", { id: "login" });
-      await router.push("/dashboard");
+      await router.push("/story");
       return;
     }
     toast.error("login failed!", { id: "login" });
