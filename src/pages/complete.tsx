@@ -1,33 +1,9 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { mongoDB } from "~/server/mongo";
-
-interface IChapter {
-  chapterId: number;
-  rootId: number;
-  content: string;
-}
-
-interface IModelObj {
-  content: string;
-  chapterId: number;
-  branches: { [key: number]: IModelObj };
-}
+import type { IModelObj } from "~/types/data";
 
 export default function Complete({ chapters }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const modler = (value: number) => {
-    const elementContent = chapters.find(el => el.chapterId === value)?.content;
-    const branches = chapters.filter(el => el.rootId === value);
-    const obj: IModelObj = { branches: {}, content: elementContent ?? "...", chapterId: value };
-
-    branches.forEach(el => {
-      const { chapterId } = el;
-      obj.branches[chapterId] = modler(chapterId);
-    });
-
-    return obj;
-  };
-
   return (
     <>
       <Head>
@@ -35,10 +11,10 @@ export default function Complete({ chapters }: InferGetStaticPropsType<typeof ge
         <meta name="description" content="Complete the story and mint your chapter!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="w-full bg-black">
-        <div className="flex flex-col justify-center items-center ml-10 w-3/4 min-h-screen">
+      <main className="flex justify-center items-center w-full bg-black">
+        <div className="flex flex-col justify-center items-center w-3/4 min-h-screen">
           <h1 className="mb-10 text-6xl font-bold text-white drop-shadow">These are all the chapter!</h1>
-          <ListValue obj={modler(1)} />
+          <ListValue obj={chapters} />
         </div>
       </main>
     </>
@@ -69,8 +45,21 @@ export const getStaticProps: GetStaticProps<{
     };
   });
 
+  const modler = (value: number) => {
+    const elementContent = chapters.find(el => el.chapterId === value)?.content;
+    const branches = chapters.filter(el => el.rootId === value);
+    const obj: IModelObj = { branches: {}, content: elementContent ?? "...", chapterId: value };
+
+    branches.forEach(el => {
+      const { chapterId } = el;
+      obj.branches[chapterId] = modler(chapterId);
+    });
+
+    return obj;
+  };
+
   return {
-    props: { chapters },
+    props: { chapters: modler(1) },
     revalidate: 60,
   };
 };
