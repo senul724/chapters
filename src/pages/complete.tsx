@@ -10,6 +10,7 @@ interface IChapter {
 
 interface IModelObj {
   content: string;
+  chapterId: number;
   branches: { [key: number]: IModelObj };
 }
 
@@ -17,7 +18,7 @@ export default function Complete({ chapters }: InferGetStaticPropsType<typeof ge
   const modler = (value: number) => {
     const elementContent = chapters.find(el => el.chapterId === value)?.content;
     const branches = chapters.filter(el => el.rootId === value);
-    const obj: IModelObj = { branches: {}, content: elementContent ?? "..." };
+    const obj: IModelObj = { branches: {}, content: elementContent ?? "...", chapterId: value };
 
     branches.forEach(el => {
       const { chapterId } = el;
@@ -34,9 +35,11 @@ export default function Complete({ chapters }: InferGetStaticPropsType<typeof ge
         <meta name="description" content="Complete the story and mint your chapter!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col justify-center items-center w-full min-h-screen bg-black">
-        <h1 className="mb-10 text-6xl font-bold text-white drop-shadow">These are all the chapter!</h1>
-        <ListValue obj={modler(1)} />
+      <main className="w-full bg-black">
+        <div className="flex flex-col justify-center items-center ml-10 w-3/4 min-h-screen">
+          <h1 className="mb-10 text-6xl font-bold text-white drop-shadow">These are all the chapter!</h1>
+          <ListValue obj={modler(1)} />
+        </div>
       </main>
     </>
   );
@@ -47,7 +50,7 @@ const ListValue = (props: { obj: IModelObj }) => {
   return (
     <div className="flex flex-col ml-10 w-full">
       <p className="p-2 w-full text-white rounded border border-white lg">{obj.content}</p>
-      {Object.keys(obj.branches).map((el) => <ListValue obj={obj.branches[Number(el)] as IModelObj} />)}
+      {Object.keys(obj.branches).map((el) => <ListValue obj={obj.branches[Number(el)] as IModelObj} key={el} />)}
     </div>
   );
 };
@@ -64,5 +67,8 @@ export const getStaticProps: GetStaticProps<{
     };
   });
 
-  return { props: { chapters } };
+  return {
+    props: { chapters },
+    revalidate: 60,
+  };
 };
