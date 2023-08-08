@@ -56,7 +56,7 @@ export default function Home() {
                       <div className="grid grid-cols-3 gap-4 w-full">
                         {data.payload.branches.map((el, index) => (
                           <div
-                            className="tracking-tight border-2 py-5 border-[#ffc400] rounded-xl hover:scale-105"
+                            className="tracking-tight border-2 py-5 border-[#ffc400] rounded-xl hover:scale-105 cursor-pointer"
                             key={index}
                             onClick={() => {
                               setRootContent((prev) => {
@@ -73,7 +73,7 @@ export default function Home() {
                         ))}
                         {data.payload.branches.length < 6 && (
                           <div
-                            className="tracking-tight border-2 py-5 border-[#ffe57f] rounded-xl hover:scale-105"
+                            className="tracking-tight border-2 py-5 border-[#ffe57f] rounded-xl hover:scale-105 cursor-pointer"
                             onClick={() => setComposing(true)}
                           >
                             <p className="w-full text-center drop-shadow-xl text-2xl font-semibold text-[#ffe57f] ">
@@ -84,11 +84,19 @@ export default function Home() {
                       </div>
                       {data.payload.rootId
                         && (
-                          <div
-                            className="py-2 w-2/3 text-2xl text-center text-white rounded-xl border-2 border-white hover:scale-105"
-                            onClick={() => setChapterId(data.payload?.rootId ?? 1)}
-                          >
-                            go back
+                          <div className="grid grid-cols-2 gap-4 w-3/4">
+                            <div
+                              className="py-2 text-2xl text-center text-white rounded-xl border-2 border-white cursor-pointer hover:scale-105"
+                              onClick={() => setChapterId(data.payload?.rootId ?? 1)}
+                            >
+                              go back
+                            </div>
+                            <div
+                              className="py-2 text-2xl text-center text-white rounded-xl border-2 border-white cursor-pointer hover:scale-105"
+                              onClick={() => setChapterId(1)}
+                            >
+                              move to the begining
+                            </div>
                           </div>
                         )}
                     </>
