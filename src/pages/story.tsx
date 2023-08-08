@@ -66,7 +66,7 @@ export default function Home() {
                               setChapterId(el.id);
                             }}
                           >
-                            <p className="w-full text-center drop-shadow-xl text-2xl font-semibold text-[#ffc400] ">
+                            <p className="w-full text-center drop-shadow-xl text-2xl font-semibold text-[#ffc400] overflow-hidden text-clip line-clamp-1">
                               {getContent(el.id)}
                             </p>
                           </div>

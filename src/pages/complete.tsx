@@ -48,15 +48,17 @@ export default function Complete({ chapters }: InferGetStaticPropsType<typeof ge
 const ListValue = (props: { obj: IModelObj }) => {
   const { obj } = props;
   return (
-    <div className="flex flex-col ml-10 w-full">
-      <p className="p-2 w-full text-white rounded border border-white lg">{obj.content}</p>
+    <div className="flex flex-col gap-1 ml-10 w-full">
+      <p className="overflow-hidden p-2 w-full text-white rounded border border-white text-clip line-clamp-1">
+        {obj.content}
+      </p>
       {Object.keys(obj.branches).map((el) => <ListValue obj={obj.branches[Number(el)] as IModelObj} key={el} />)}
     </div>
   );
 };
 
 export const getStaticProps: GetStaticProps<{
-  chapters: IChapter[];
+  chapters: IModelObj;
 }> = async () => {
   const payload = await mongoDB.find().toArray();
   const chapters = payload.map((el) => {
