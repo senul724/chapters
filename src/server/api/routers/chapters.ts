@@ -1,14 +1,7 @@
-import { JsonRpcProvider } from "@ethersproject/providers";
-import { TRPCError } from "@trpc/server";
-import { Contract, type ContractFunction } from "ethers";
 import { z } from "zod";
-import { getErrorMsg } from "~/data/error-list";
 import { createTRPCRouter, privateProcedure } from "~/server/api/trpc";
 import { prisma } from "~/server/db";
 import { mongoDB, mongoDBCount } from "~/server/mongo";
-import { ZodAvailableNetworks } from "~/types/web3";
-import { getNetworkArray } from "~/utils/type_helper";
-import * as pvtRPCs from "~/web3/rpcs/private-rpcs.json";
 
 export const chaptersRouter = createTRPCRouter({
   getBranchChapters: privateProcedure
