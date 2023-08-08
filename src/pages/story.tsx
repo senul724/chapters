@@ -6,8 +6,9 @@ import { api } from "~/utils/api";
 export default function Home() {
   const [chapterId, setChapterId] = useState(1);
   const [composing, setComposing] = useState(false);
+  const [rootContent, setRootContent] = useState<{ [key: number]: string }>({ 1: "Once upon a time..." });
 
-  const { data, isLoading, refetch } = api.chapters.getChapters.useQuery({ chapterId }, {
+  const { data, isLoading, refetch } = api.chapters.getBranchChapters.useQuery({ chapterId }, {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
@@ -38,7 +39,7 @@ export default function Home() {
                       level={data.payload.level + 1}
                       rootId={chapterId}
                       closeAction={() => setComposing(false)}
-                      prevContent={getContent(chapterId)}
+                      prevContent={rootContent[chapterId] ?? "..."}
                       refetch={async () => {
                         await refetch();
                       }}
@@ -48,7 +49,7 @@ export default function Home() {
                     <>
                       <div className="flex gap-4 tracking-tight border-2 py-10 w-2/3 border-[#ffc400] rounded-xl ">
                         <p className="w-full text-center drop-shadow-xl text-6xl font-semibold text-[#ffc400] ">
-                          {getContent(chapterId)}
+                          {rootContent[chapterId] ?? "..."}
                         </p>
                       </div>
                       <div className="-mt-5 w-1/5 bg-white h-[2px]" />
@@ -57,14 +58,20 @@ export default function Home() {
                           <div
                             className="tracking-tight border-2 py-5 border-[#ffc400] rounded-xl hover:scale-105"
                             key={index}
-                            onClick={() => setChapterId(el.id)}
+                            onClick={() => {
+                              setRootContent((prev) => {
+                                prev[el.id] = getContent(el.id);
+                                return prev;
+                              });
+                              setChapterId(el.id);
+                            }}
                           >
                             <p className="w-full text-center drop-shadow-xl text-2xl font-semibold text-[#ffc400] ">
                               {getContent(el.id)}
                             </p>
                           </div>
                         ))}
-                        {data.payload.branches.length < 3 && (
+                        {data.payload.branches.length < 6 && (
                           <div
                             className="tracking-tight border-2 py-5 border-[#ffe57f] rounded-xl hover:scale-105"
                             onClick={() => setComposing(true)}

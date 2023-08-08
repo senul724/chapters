@@ -11,16 +11,17 @@ import { getNetworkArray } from "~/utils/type_helper";
 import * as pvtRPCs from "~/web3/rpcs/private-rpcs.json";
 
 export const chaptersRouter = createTRPCRouter({
-  getChapters: privateProcedure
+  getBranchChapters: privateProcedure
     .input(z.object({ chapterId: z.number() }))
     .query(async ({ ctx, input }) => {
+      const { chapterId } = input;
       try {
         const payload = await ctx.prisma.chapter.findUnique({
           where: {
-            id: input.chapterId,
+            id: chapterId,
           },
           select: {
-            rootId: input.chapterId !== 1,
+            rootId: chapterId !== 1,
             level: true,
             authorAddress: true,
             branches: {
@@ -33,8 +34,7 @@ export const chaptersRouter = createTRPCRouter({
         });
         let contentList: { content: string; id: number }[] | null = null;
         if (payload) {
-          const chapterIds = payload.branches.map((el) => el.id);
-          const content = await mongoDB.find({ chapterId: { $in: [...chapterIds, input.chapterId] } }).toArray();
+          const content = await mongoDB.find({ rootId: chapterId }).toArray();
           contentList = content.map((el) => {
             return { content: el.content, id: el.chapterId };
           });
@@ -57,7 +57,7 @@ export const chaptersRouter = createTRPCRouter({
         if (!nextId) {
           return { success: false };
         }
-        await mongoDB.insertOne({ chapterId: nextId, content });
+        await mongoDB.insertOne({ chapterId: nextId, content, rootId });
         await mongoDBCount.updateOne({ name: "count" }, { $set: { "nextId": nextId + 1 } });
         await prisma.chapter.create({
           data: {
