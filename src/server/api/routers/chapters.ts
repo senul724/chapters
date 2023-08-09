@@ -29,7 +29,7 @@ export const chaptersRouter = createTRPCRouter({
         if (payload) {
           const content = await mongoDB.find({ rootId: chapterId }).toArray();
           contentList = content.map((el) => {
-            return { content: el.content, id: el.chapterId };
+            return { content: el.content as string, id: el.chapterId as number };
           });
         }
         return { payload, contentList };

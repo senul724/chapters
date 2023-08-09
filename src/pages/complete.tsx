@@ -1,4 +1,4 @@
-import { GetStaticProps, InferGetStaticPropsType } from "next";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import Head from "next/head";
 import { mongoDB } from "~/server/mongo";
 import type { IModelObj } from "~/types/data";
@@ -28,7 +28,10 @@ const ListValue = (props: { obj: IModelObj }) => {
       <p className="overflow-hidden p-2 w-full text-white rounded border border-white text-clip line-clamp-1">
         {obj.content}
       </p>
-      {Object.keys(obj.branches).map((el) => <ListValue obj={obj.branches[Number(el)] as IModelObj} key={el} />)}
+      {Object.keys(obj.branches).map((el) => {
+        const data = obj.branches[Number(el)];
+        return data ? <ListValue obj={data} key={el} /> : <></>;
+      })}
     </div>
   );
 };

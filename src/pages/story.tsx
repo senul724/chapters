@@ -6,7 +6,7 @@ import { api } from "~/utils/api";
 export default function Home() {
   const [chapterId, setChapterId] = useState(1);
   const [composing, setComposing] = useState(false);
-  const [rootContent, setRootContent] = useState<{ [key: number]: string }>({ 1: "Once upon a time..." });
+  const [rootContent, setRootContent] = useState<Record<number, string>>({ 1: "Once upon a time..." });
 
   const { data, isLoading, refetch } = api.chapters.getBranchChapters.useQuery({ chapterId }, {
     refetchOnWindowFocus: false,
