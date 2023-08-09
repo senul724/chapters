@@ -6,17 +6,17 @@ export function middleware(request: NextRequest) {
 
   const session = request.cookies.get("_session")?.value;
 
-  if (path === "/" && session) {
-    return NextResponse.redirect(new URL("/story", request.url));
+  if (!session && path !== "/") {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (path.startsWith("/story") && !session) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (path === "/" && session) {
+    return NextResponse.redirect(new URL("/story", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/", "/story"],
+  matcher: ["/", "/story", "/dashboard", "/complete"],
 };

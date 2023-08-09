@@ -3,7 +3,7 @@ import { api } from "~/utils/api";
 export const useSession = () => {
   const { data: session, isLoading: validating, refetch } = api.auth.getSession.useQuery({ forward: true }, {
     refetchOnReconnect: true,
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false,
     staleTime: 30000,
   });
 

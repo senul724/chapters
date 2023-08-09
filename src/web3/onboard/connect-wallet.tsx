@@ -10,6 +10,7 @@ import { FortmaticIcon } from "src/components/icons/fortmatic";
 import { MetamaskIcon } from "src/components/icons/metamask";
 import type { AvailableWallets } from "src/types/web3";
 import { getErrorMsg } from "~/data/error-list";
+import { useSession } from "~/hooks/use-session";
 import { api } from "~/utils/api";
 import { onBoard } from "./on-board";
 import { walletNotFound } from "./prompt-payload";
@@ -36,6 +37,7 @@ export const ConnectWallet = (props: {
   } = props;
 
   const router = useRouter();
+  const { refetch } = useSession();
 
   useEffect(
     () => {
@@ -88,6 +90,7 @@ export const ConnectWallet = (props: {
       return;
     }
     toast.error("login failed!", { id: "login" });
+    await refetch();
     setConnectWalletOpen(false);
   };
 
