@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Head from "next/head";
 import { useState } from "react";
 
 export default function Home() {
@@ -14,11 +13,6 @@ export default function Home() {
   );
   return (
     <>
-      <Head>
-        <title>Chapters</title>
-        <meta name="description" content="Complete the story and mint your chapter!" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <main className="flex flex-col justify-center items-center min-h-screen bg-black">
         <div className="container flex flex-col gap-12 justify-center items-center py-16 px-4">
           <div className="flex gap-4 text-8xl font-bold tracking-tight text-[#ffc400] drop-shadow-xl text-center">
