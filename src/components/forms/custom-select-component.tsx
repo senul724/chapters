@@ -34,8 +34,8 @@ export default function CustomSelectComponent(props: IProps) {
       />
       <div
         className={classNames(
-          "flex items-center p-3 text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow",
-          "peer-checked:p-5 peer-checked:drop-shadow-xl peer-checked:border-2 peer-checked:border-[#05CE91] peer-checked:bg-gray-50",
+          "flex items-center p-3 text-base font-bold text-[#ffc400] border border-[#ffc400] rounded-lg hover:scale-105 group",
+          "peer-checked:scale-110 peer-checked:bg-gray-900",
         )}
       >
         <>{icon}</>
@@ -44,7 +44,7 @@ export default function CustomSelectComponent(props: IProps) {
           ? (
             <span
               className={classNames(
-                "inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500 bg-gray-200",
+                "inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-[#ffc400] border border-[#ffc400]",
                 " rounded ",
               )}
             >
