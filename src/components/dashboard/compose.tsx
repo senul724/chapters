@@ -11,6 +11,7 @@ export default function Compose(
   const { mutateAsync: publish, isLoading } = api.chapters.publishChapter.useMutation();
 
   const contentRef = useRef<HTMLTextAreaElement>(null);
+  const titleRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClose = () => {
     if (!isLoading) {
@@ -20,14 +21,15 @@ export default function Compose(
 
   const handleShoutout = async () => {
     const content = contentRef.current?.value;
+    const title = titleRef.current?.value;
     if (isLoading) return;
 
-    if (!content) {
-      return toast.error("provide a message to send");
+    if (!content || !title) {
+      return toast.error("please add your story and title to move forward");
     }
 
     toast.loading("publishing...");
-    const res = await publish({ rootId, level, content });
+    const res = await publish({ title, rootId, level, content });
     toast.dismiss();
 
     if (res.success) {
@@ -53,6 +55,12 @@ export default function Compose(
         className="p-4 w-2/3 h-48 text-xl bg-black rounded-lg border-2 text-[#ffe57f] border-[#ffe57f]"
         placeholder="continue the story from here..."
         ref={contentRef}
+      />
+      <textarea
+        className="p-4 w-2/3 h-20 text-xl bg-black rounded-lg border-2 text-[#ffe57f] border-[#ffe57f]"
+        placeholder="enter a title for your chapter"
+        ref={titleRef}
+        maxLength={120}
       />
       <button
         className="py-1 px-3 text-2xl font-semibold text-[#ffe57f] rounded-lg w-1/4 border border-[#ffe57f] hover:scale-105"
