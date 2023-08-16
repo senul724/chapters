@@ -113,7 +113,7 @@ export const ConnectWallet = (props: {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
+            <div className="fixed inset-0 bg-black bg-opacity-75" />
           </Transition.Child>
 
           <div className="overflow-y-auto fixed inset-0">
@@ -127,12 +127,7 @@ export const ConnectWallet = (props: {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="overflow-hidden p-6 w-full max-w-md text-left align-middle bg-white rounded-2xl shadow-xl transition-all transform">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
-                  </Dialog.Title>
+                <Dialog.Panel className="overflow-hidden p-6 w-full max-w-md text-left align-middle border border-[#ffc400] bg-black rounded-2xl shadow-xl transition-all transform">
                   <div className="mt-2">
                     <Formik
                       initialValues={initialValues}
@@ -140,8 +135,8 @@ export const ConnectWallet = (props: {
                     >
                       {({ isSubmitting }) => (
                         <Form>
-                          <div className="p-4 bg-white rounded-xl sm:p-6">
-                            <h5 className="mb-3 text-base font-semibold text-gray-900 md:text-xl">
+                          <div className="p-4 rounded-xl sm:p-6">
+                            <h5 className="mb-5 text-base font-semibold text-[#ffc400] md:text-xl">
                               Select wallet
                             </h5>
                             <ul className="my-4 space-y-3">
@@ -178,7 +173,7 @@ export const ConnectWallet = (props: {
                             </ul>
                             <button
                               type="submit"
-                              className="py-1 mt-4 w-full text-2xl font-semibold text-white bg-emerald-500 rounded-xl shadow-xl hover:scale-105"
+                              className="py-1 mt-10 w-full text-2xl font-medium text-[#ffc400] rounded-xl hover:scale-105 border border-[#ffc400]"
                               disabled={isSubmitting}
                             >
                               <h3>Connect</h3>

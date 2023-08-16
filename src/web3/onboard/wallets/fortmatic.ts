@@ -3,6 +3,7 @@ import { providers } from "ethers";
 import FortmaticProvider from "fortmatic";
 import toast from "react-hot-toast";
 import { getErrorMsg } from "src/data/error-list";
+import { env } from "~/env.mjs";
 
 const fortmatic = () => {
   // walletId = "2";
@@ -13,7 +14,7 @@ const fortmatic = () => {
     let signer: undefined | JsonRpcSigner = undefined;
 
     // eslint-disable-next-line
-    const fm = new FortmaticProvider(process.env.NEXT_PUBLIC_FORTMATIC_MAIN as string);
+    const fm = new FortmaticProvider(env.NEXT_PUBLIC_FORTMATIC_MAIN);
     const ftmProvider = fm.getProvider();
     if (ftmProvider.isFortmatic) {
       try {
@@ -41,9 +42,9 @@ const fortmatic = () => {
 //   let net;
 //   const getApi = (id: string) => {
 //     if (id === "1" || id === "56" || id === "137") {
-//       return process.env.NEXT_PUBLIC_FORTMATIC_MAIN;
+//       return env.NEXT_PUBLIC_FORTMATIC_MAIN;
 //     } else {
-//       return process.env.NEXT_PUBLIC_FORTMATIC_TEST;
+//       return env.NEXT_PUBLIC_FORTMATIC_TEST;
 //     }
 //   };
 //

@@ -1,3 +1,5 @@
+import { env } from "~/env.mjs";
+
 export const jwt_key = new TextEncoder().encode(
-  process.env.JWT_SECRET ?? "",
+  env.JWT_SECRET,
 );
