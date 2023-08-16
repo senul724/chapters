@@ -1,4 +1,5 @@
 import type { AppProps, AppType } from "next/app";
+import Head from "next/head";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import type { NextPage } from "next";
@@ -28,7 +29,21 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
   };
   return (
     <>
-      <Toaster position="top-left" />
+      <Head>
+        <title>Chapters</title>
+        <meta name="description" content="Complete the story and mint your chapter!" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Toaster
+        position="top-left"
+        toastOptions={{
+          style: {
+            borderRadius: "10px",
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      />
       <nav className="flex justify-center items-center w-full py-4 bg-black border-b border-[#ffc400]">
         <div
           className="cursor-pointer w-1/2 text-[#ffc400] font-bold text-4xl px-2"
