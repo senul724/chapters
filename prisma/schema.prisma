@@ -23,6 +23,7 @@ model Chapter {
   level         Int
   author        User      @relation(fields: [authorAddress], references: [address])
   authorAddress String
+  title         String
   rootId        Int?
   root          Chapter?  @relation("BranchRoot", fields: [rootId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   branches      Chapter[] @relation("BranchRoot")
