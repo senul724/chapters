@@ -52,12 +52,12 @@ export default function Compose(
       </div>
       <p className="mb-10 text-4xl font-bold text-[#ffe57f]">{prevContent}</p>
       <textarea
-        className="p-4 w-2/3 h-48 text-xl bg-black rounded-lg border-2 text-[#ffe57f] border-[#ffe57f]"
+        className="p-4 w-2/3 h-48 text-xl bg-[#0C0A00] rounded-lg border-2 text-[#ffe57f] border-[#ffe57f]"
         placeholder="continue the story from here..."
         ref={contentRef}
       />
       <textarea
-        className="p-4 w-2/3 h-20 text-xl bg-black rounded-lg border-2 text-[#ffe57f] border-[#ffe57f]"
+        className="p-4 w-2/3 h-20 text-xl bg-[#0C0A00] rounded-lg border-2 text-[#ffe57f] border-[#ffe57f]"
         placeholder="enter a title for your chapter"
         ref={titleRef}
         maxLength={120}

@@ -27,6 +27,7 @@ export const chaptersRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       const { chapterId } = input;
       try {
+        console.log(chapterId);
         const payload = await ctx.prisma.chapter.findUnique({
           where: {
             id: chapterId,
@@ -54,13 +55,29 @@ export const chaptersRouter = createTRPCRouter({
           return { payload };
         }
         const content = await mongoDB.find({ chapterId }).toArray();
-        return { payload: { ...payload, rootContent: content && content[0] ? content[0].content as string : "..." } };
-      } catch {
+
+        return {
+          payload: {
+            ...payload,
+            rootContent: content && content[0]
+              ? content[0].content as string
+              : "...",
+          },
+        };
+      } catch (e) {
+        console.log(e);
         return { payload: null };
       }
     }),
   publishChapter: privateProcedure
-    .input(z.object({ rootId: z.number(), level: z.number(), content: z.string(), title: z.string().max(121) }))
+    .input(
+      z.object({
+        rootId: z.number(),
+        level: z.number(),
+        content: z.string(),
+        title: z.string().max(121),
+      }),
+    )
     .mutation(async ({ input, ctx }) => {
       const { rootId, level, content, title } = input;
       try {
@@ -73,7 +90,9 @@ export const chaptersRouter = createTRPCRouter({
           return { success: false };
         }
         await mongoDB.insertOne({ chapterId: nextId, content, rootId });
-        await mongoDBCount.updateOne({ name: "count" }, { $set: { "nextId": nextId + 1 } });
+        await mongoDBCount.updateOne({ name: "count" }, {
+          $set: { "nextId": nextId + 1 },
+        });
         await prisma.chapter.create({
           data: {
             id: nextId,

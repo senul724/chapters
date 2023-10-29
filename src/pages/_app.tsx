@@ -44,7 +44,7 @@ const MyApp: AppType = ({ Component, pageProps }: AppPropsWithLayout) => {
           },
         }}
       />
-      <nav className="flex justify-center items-center w-full py-4 bg-black border-b border-[#ffc400]">
+      <nav className="flex justify-center items-center w-full py-4 bg-[#0C0A00] border-b border-[#ffc400]">
         <div
           className="cursor-pointer w-1/2 text-[#ffc400] font-bold text-4xl px-2"
           onClick={() => void router.push("/")}

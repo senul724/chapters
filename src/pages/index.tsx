@@ -13,7 +13,7 @@ export default function Home() {
   );
   return (
     <>
-      <main className="flex flex-col justify-center items-center min-h-screen bg-black">
+      <main className="flex flex-col justify-center items-center min-h-screen bg-[#0C0A00]">
         <div className="container flex flex-col gap-12 justify-center items-center py-16 px-4">
           <div className="flex gap-4 text-8xl font-bold tracking-tight text-[#ffc400] drop-shadow-xl text-center">
             Complete The Story And Mint Your Chapter

@@ -9,13 +9,19 @@ export default function Home() {
 
   const router = useRouter();
 
-  const { data, isLoading, refetch } = api.chapters.getBranchChapters.useQuery({ chapterId }, {
+  const { data, isLoading, refetch } = api.chapters.getBranchChapters.useQuery({
+    chapterId,
+  }, {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
   });
 
   const payload = data?.payload;
+
+  useEffect(() => {
+    console.log(data, isLoading);
+  }, [data, isLoading]);
 
   useEffect(() => {
     const receivedChapterId = Number(router.query.chapterId);
@@ -26,7 +32,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen bg-black">
+    <main className="flex flex-col justify-center items-center min-h-screen bg-[#0C0A00]">
       <div className="container flex flex-col gap-12 justify-center items-center py-16 px-4">
         {payload
           ? (
@@ -80,8 +86,8 @@ export default function Home() {
                         </div>
                       )}
                     </div>
-                    {payload.rootId
-                      && (
+                    {payload.rootId &&
+                      (
                         <div className="grid grid-cols-2 gap-4 w-3/4">
                           <div
                             className="py-2 text-2xl text-center text-white rounded-xl border-2 border-white cursor-pointer hover:scale-105"

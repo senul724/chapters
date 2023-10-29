@@ -113,7 +113,7 @@ export const ConnectWallet = (props: {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black bg-opacity-75" />
+            <div className="fixed inset-0 bg-[#0C0A00] bg-opacity-75" />
           </Transition.Child>
 
           <div className="overflow-y-auto fixed inset-0">
@@ -127,7 +127,7 @@ export const ConnectWallet = (props: {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="overflow-hidden p-6 w-full max-w-md text-left align-middle border border-[#ffc400] bg-black rounded-2xl shadow-xl transition-all transform">
+                <Dialog.Panel className="overflow-hidden p-6 w-full max-w-md text-left align-middle border border-[#ffc400] bg-[#0C0A00] rounded-2xl shadow-xl transition-all transform">
                   <div className="mt-2">
                     <Formik
                       initialValues={initialValues}

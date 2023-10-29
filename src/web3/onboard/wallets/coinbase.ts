@@ -3,15 +3,14 @@ import type { JsonRpcSigner } from "@ethersproject/providers";
 import { providers } from "ethers";
 import toast from "react-hot-toast";
 import { getErrorMsg } from "src/data/error-list";
-import { siteData } from "~/web3/data/data";
 
 const coinbase = () => {
   // const walletId = '5'
 
   // Initializing the Coinbase SDK
   const cb = new CoinbaseWalletSDK({
-    appName: siteData.siteName,
-    appLogoUrl: siteData.logo,
+    appName: "chapter",
+    appLogoUrl: "",
     darkMode: false,
   });
 

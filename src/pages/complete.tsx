@@ -5,7 +5,7 @@ import type { IModelObj } from "~/types/data";
 
 export default function Complete({ chapters }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <main className="flex justify-center items-center w-full bg-black">
+    <main className="flex justify-center items-center w-full bg-[#0C0A00]">
       <div className="flex flex-col justify-center items-center w-3/5 min-h-screen">
         <h1 className="mb-10 text-6xl font-bold text-white drop-shadow">These are all the chapter!</h1>
         <ListValue obj={chapters} />
